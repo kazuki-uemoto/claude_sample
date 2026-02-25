@@ -1,28 +1,28 @@
-const http = require('http');
+const express = require('express');
 
-const server = http.createServer((req, res) => {
-  if (req.url === '/api/hello') {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ message: 'Hello, World!' }));
-  } else if (req.url === '/api/goodbye') {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ message: 'Goodbye, World!' }));
-  } else if (req.url === '/api/time') {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ time: new Date().toISOString() }));
-  } else if (req.url.startsWith('/api/echo')) {
-    let body = '';
-    req.on('data', chunk => { body += chunk; });
-    req.on('end', () => {
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ echo: body || null }));
-    });
-  } else {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello, World!\n');
-  }
+const app = express();
+app.use(express.text({ type: '*/*' }));
+
+app.get('/', (req, res) => {
+  res.send('Hello, World!\n');
 });
 
-server.listen(3000, () => {
+app.get('/api/hello', (req, res) => {
+  res.json({ message: 'Hello, World!' });
+});
+
+app.get('/api/goodbye', (req, res) => {
+  res.json({ message: 'Goodbye, World!' });
+});
+
+app.get('/api/time', (req, res) => {
+  res.json({ time: new Date().toISOString() });
+});
+
+app.post('/api/echo', (req, res) => {
+  res.json({ echo: req.body || null });
+});
+
+app.listen(3000, () => {
   console.log('Server running at http://localhost:3000');
 });
