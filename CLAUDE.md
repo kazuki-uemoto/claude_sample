@@ -7,6 +7,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
+# Install dependencies
+npm install
+
 # Start the server
 node index.js
 ```
@@ -20,7 +23,7 @@ cmd //c "taskkill /PID <pid> /F"
 
 ## Architecture
 
-Single-file Node.js HTTP server (`index.js`) using the built-in `http` module. Listens on port 3000.
+Single-file Express server (`index.js`) using the `express` npm package. Listens on port 3000. Request bodies are parsed as text for all content types.
 
 **Routes:**
 - `GET /` — plain text `Hello, World!`
