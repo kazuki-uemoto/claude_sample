@@ -26,3 +26,4 @@ Single-file Node.js HTTP server (`index.js`) using the built-in `http` module. L
 - `GET /` — plain text `Hello, World!`
 - `GET /api/hello` — JSON `{ "message": "Hello, World!" }`
 - `GET /api/goodbye` — JSON `{ "message": "Goodbye, World!" }`
+- `GET /api/time` — JSON `{ "time": "<ISO timestamp>" }`
